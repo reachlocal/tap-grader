@@ -1,0 +1,54 @@
+{
+    "type": [
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "businessName": {
+            "type": "string"
+        },
+        "addressLine1": {
+            "type": "string"
+        },
+        "city": {
+            "type": "string"
+        },
+        "province": {
+            "type": "string"
+        },
+        "postalCode": {
+            "type": "string"
+        },
+        "country": {
+            "type": "string"
+        },
+        "phone1": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string"
+        },
+        "rating": {
+            "type": "string"
+        },
+        "openHours": {
+            "type": "string"
+        },
+        "reviewCount": {
+            "type": "integer"
+        },
+        "link": {
+            "type": "string"
+        },
+        "analyzedDate": {
+            "type": "string",
+            "format": "timestamp"
+        },
+        "isExpired": {
+            "type": "string"
+        }
+    }
+}

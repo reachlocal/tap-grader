@@ -1,0 +1,56 @@
+{
+    "type": [
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "advertiserId": {
+            "type": "string"
+        },
+        "businessId": {
+            "type": "integer"
+        },
+        "coBrandId": {
+            "type": "integer"
+        },
+        "proposalId": {
+            "type": "string"
+        },
+        "advertiserName": {
+            "type": "string"
+        },
+        "documentType": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "statusColor": {
+            "type": "string"
+        },
+        "score": {
+            "type": "integer"
+        },
+        "createdBy": {
+            "type": "string"
+        },
+        "userFullName": {
+            "type": "string"
+        },
+        "created": {
+            "type": "string",
+            "format": "timestamp"
+        },
+        "updated": {
+            "type": "string",
+            "format": "timestamp"
+        },
+        "lastModified": {
+            "type": "string",
+            "format": "timestamp"
+        }
+    }
+}

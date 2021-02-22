@@ -1,0 +1,35 @@
+{
+    "type": [
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "startTime": {
+            "type": "string",
+            "format": "timestamp"
+        },
+        "endTime": {
+            "type": "string",
+            "format": "timestamp"
+        },
+        "createdBy": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "message": {
+            "type": "string"
+        },
+        "lastModified": {
+            "type": "string",
+            "format": "timestamp"
+        }
+    }
+}

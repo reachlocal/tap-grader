@@ -1,0 +1,29 @@
+{
+    "type": [
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "price": {
+            "type": "integer"
+        },
+        "type": {
+            "type": "string"
+        },
+        "volumeLow": {
+            "type": "integer"
+        },
+        "volumeHigh": {
+            "type": "integer"
+        },
+        "countLow": {
+            "type": "integer"
+        },
+        "countHigh": {
+            "type": "integer"
+        }
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "type": [
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "target": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "actionStatus": {
+            "type": "string"
+        },
+        "employeeId": {
+            "type": "string"
+        },
+        "keywords": {
+            "type": "string"
+        },
+        "existingKeywords": {
+            "type": "string"
+        },
+        "fromSpecialty_id": {
+            "type": "string"
+        },
+        "fromSpecialty_name": {
+            "type": "string"
+        },
+        "fromSpecialty_parentId": {
+            "type": "integer"
+        },
+        "toSpecialty_id": {
+            "type": "string"
+        },
+        "toSpecialty_name": {
+            "type": "string"
+        },
+        "toSpecialty_parentId": {
+            "type": "integer"
+        },
+        "category_categoryId": {
+            "type": "integer"
+        },
+        "category_categoryName": {
+            "type": "string"
+        },
+        "category_subCategoryId": {
+            "type": "integer"
+        },
+        "category_subCategoryName": {
+            "type": "string"
+        },
+        "created": {
+            "type": "string",
+            "format": "timestamp"
+        }
+    }
+}

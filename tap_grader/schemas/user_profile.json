@@ -1,0 +1,62 @@
+{
+    "type": [
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "userEmail": {
+            "type": "string"
+        },
+        "firstName": {
+            "type": "string"
+        },
+        "lastName": {
+            "type": "string"
+        },
+        "division": {
+            "type": "string"
+        },
+        "subdivision": {
+            "type": "string"
+        },
+        "employeeId": {
+            "type": "string"
+        },
+        "adwordsAccountId": {
+            "type": "integer"
+        },
+        "isAdmin": {
+            "type": "string"
+        },
+        "canAssumeUser": {
+            "type": "string"
+        },
+        "isManagerAdmin": {
+            "type": "string"
+        },
+        "isManager": {
+            "type": "string"
+        },
+        "isGupManager": {
+            "type": "string"
+        },
+        "roles": {
+            "type": "string"
+        },
+        "created": {
+            "type": "string",
+            "format": "timestamp"
+        },
+        "lastModified": {
+            "type": "string",
+            "format": "timestamp"
+        },
+        "adwordsAccountRefreshDate": {
+            "type": "string",
+            "format": "timestamp"
+        }
+    }
+}

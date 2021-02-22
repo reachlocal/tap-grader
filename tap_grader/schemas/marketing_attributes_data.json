@@ -1,0 +1,92 @@
+{
+    "type": [
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "businessCategory": {
+            "type": "string"
+        },
+        "pctHasSearch": {
+            "type": "string"
+        },
+        "pctHasDisplay": {
+            "type": "string"
+        },
+        "pctHasSocial": {
+            "type": "string"
+        },
+        "pctGoodSEO": {
+            "type": "string"
+        },
+        "pctAvgSEO": {
+            "type": "string"
+        },
+        "pctPoorSEO": {
+            "type": "string"
+        },
+        "reviews50th": {
+            "type": "string"
+        },
+        "reviews75th": {
+            "type": "string"
+        },
+        "ratings50th": {
+            "type": "string"
+        },
+        "ratings75th": {
+            "type": "string"
+        },
+        "gmbMissingMost": {
+            "type": "string"
+        },
+        "gmbMissing2ndMost": {
+            "type": "string"
+        },
+        "socialLikes": {
+            "type": "string"
+        },
+        "avgSocialProfiles": {
+            "type": "string"
+        },
+        "popularSocialNetwork1": {
+            "type": "string"
+        },
+        "popularSocialNetwork2": {
+            "type": "string"
+        },
+        "pctHasAnalytics": {
+            "type": "string"
+        },
+        "desktopScore25th": {
+            "type": "string"
+        },
+        "desktopScore50th": {
+            "type": "string"
+        },
+        "desktopScoreMean": {
+            "type": "string"
+        },
+        "desktopScore75th": {
+            "type": "string"
+        },
+        "mobileScore25th": {
+            "type": "string"
+        },
+        "mobileScore50th": {
+            "type": "string"
+        },
+        "mobileScoreMean": {
+            "type": "string"
+        },
+        "mobileScore75th": {
+            "type": "string"
+        },
+        "noOfBusinessesAnalyzed": {
+            "type": "integer"
+        }
+    }
+}
