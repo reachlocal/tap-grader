@@ -1,0 +1,125 @@
+{
+    "type": [
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "businessId": {
+            "type": "integer"
+        },
+        "advertiserId": {
+            "type": "string"
+        },
+        "salesforceAccountId": {
+            "type": "string"
+        },
+        "opportunityId": {
+            "type": "string"
+        },
+        "leadId": {
+            "type": "string"
+        },
+        "solutions": {
+            "type": "string"
+        },
+        "defaultLocation_addressLine1": {
+            "type": "string"
+        },
+        "defaultLocation_addressLine2": {
+            "type": "string"
+        },
+        "defaultLocation_city": {
+            "type": "string"
+        },
+        "defaultLocation_province": {
+            "type": "string"
+        },
+        "defaultLocation_postalCode": {
+            "type": "string"
+        },
+        "defaultLocation_latitude": {
+            "type": "string"
+        },
+        "defaultLocation_longitude": {
+            "type": "string"
+        },
+        "proposalDate": {
+            "type": "string"
+        },
+        "createdBy": {
+            "type": "string"
+        },
+        "updatedBy": {
+            "type": "string"
+        },
+        "lastModified": {
+            "type": "string"
+        },
+        "categoryInsights_config_businessCategoryId": {
+            "type": "integer"
+        },
+        "categoryInsights_config_businessCategoryName": {
+            "type": "string"
+        },
+        "categoryInsights_config_businessSubCategoryId": {
+            "type": "integer"
+        },
+        "categoryInsights_config_businessSubCategoryName": {
+            "type": "string"
+        },
+        "categoryInsights_config_displayMessage": {
+            "type": "string"
+        },
+        "categoryInsights_config_categoryDisplayName": {
+            "type": "string"
+        },
+        "categoryInsights_insights_localLeadsDelivered": {
+            "type": "string"
+        },
+        "categoryInsights_insights_monthlyConsumers": {
+            "type": "string"
+        },
+        "categoryInsights_insights_totalCampaigns": {
+            "type": "string"
+        },
+        "categoryInsights_insights_activeCampaigns": {
+            "type": "integer"
+        },
+        "categoryInsights_insights_clickThroughRate": {
+            "type": "string"
+        },
+        "categoryInsights_insights_costPerClick": {
+            "type": "string"
+        },
+        "conclusion_conclusionText": {
+            "type": "string"
+        },
+        "conclusion_contactName": {
+            "type": "string"
+        },
+        "conclusion_email": {
+            "type": "string"
+        },
+        "conclusion_phoneNumber": {
+            "type": "string"
+        },
+        "scores_id": {
+            "type": "string"
+        },
+        "scores_advertiser_id": {
+            "type": "string"
+        },
+        "scores_overallScore": {
+            "type": "integer"
+        },
+        "scores_scoreHeadline": {
+            "type": "string"
+        },
+        "scores_scoreHighlights": {
+            "type": "string"
+        }
+    }
+}

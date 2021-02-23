@@ -1,0 +1,340 @@
+{
+    "type": [
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "domain": {
+            "type": "string"
+        },
+        "reportId": {
+            "type": "string"
+        },
+        "accountId": {
+            "type": "string"
+        },
+        "meta_analysisCountry": {
+            "type": "string"
+        },
+        "meta_reportCompletedAt": {
+            "type": "string"
+        },
+        "meta_requestedBy": {
+            "type": "string"
+        },
+        "meta_detectedName": {
+            "type": "string"
+        },
+        "meta_detectedAddress": {
+            "type": "string"
+        },
+        "meta_detectedPhone": {
+            "type": "string"
+        },
+        "overallScore": {
+            "type": "integer"
+        },
+        "analysedPageCount": {
+            "type": "integer"
+        },
+        "amountOfContent_totalWordCount": {
+            "type": "integer"
+        },
+        "amountOfContent_averageWordsPerPage": {
+            "type": "integer"
+        },
+        "amountOfContent_pagesFound": {
+            "type": "integer"
+        },
+        "amountOfContent_pagesTested": {
+            "type": "integer"
+        },
+        "headings_hasGoodHeadings": {
+            "type": "string"
+        },
+        "headings_hasContentForEveryHeading": {
+            "type": "string"
+        },
+        "analytics_analyticsTool": {
+            "type": "string"
+        },
+        "analytics_hasAnalytics": {
+            "type": "string"
+        },
+        "facebookPage_pageLink": {
+            "type": "string"
+        },
+        "facebookPage_pageLikes": {
+            "type": "integer"
+        },
+        "facebookPage_found": {
+            "type": "string"
+        },
+        "facebookPage_pageId": {
+            "type": "string"
+        },
+        "facebookPage_pageName": {
+            "type": "string"
+        },
+        "facebookPage_image": {
+            "type": "string"
+        },
+        "facebookPage_phone": {
+            "type": "string"
+        },
+        "facebookPage_address": {
+            "type": "string"
+        },
+        "facebookRetargeting_hasPixel": {
+            "type": "string"
+        },
+        "lastUpdated_daysSinceUpdate": {
+            "type": "integer"
+        },
+        "lastUpdated_lastUpdatedDate": {
+            "type": "string"
+        },
+        "mobile_isMobile": {
+            "type": "string"
+        },
+        "mobile_isTablet": {
+            "type": "string"
+        },
+        "mobile_mobileScreenshotUrl": {
+            "type": "string"
+        },
+        "mobile_tabletScreenshotUrl": {
+            "type": "string"
+        },
+        "mobile_hasMobileSite": {
+            "type": "string"
+        },
+        "mobile_mobileSiteUrl": {
+            "type": "string"
+        },
+        "pageCount_pagesDiscoveredCount": {
+            "type": "integer"
+        },
+        "twitter_averageInteractionsPerPost": {
+            "type": "integer"
+        },
+        "twitter_found": {
+            "type": "string"
+        },
+        "twitter_accountId": {
+            "type": "string"
+        },
+        "twitter_accountName": {
+            "type": "string"
+        },
+        "twitter_accountLink": {
+            "type": "string"
+        },
+        "twitter_image": {
+            "type": "string"
+        },
+        "twitter_coverImage": {
+            "type": "string"
+        },
+        "twitter_followers": {
+            "type": "integer"
+        },
+        "twitter_following": {
+            "type": "integer"
+        },
+        "twitter_postCount": {
+            "type": "integer"
+        },
+        "cms_hasCms": {
+            "type": "string"
+        },
+        "cms_cmsSolution": {
+            "type": "string"
+        },
+        "spider_hasErrors": {
+            "type": "string"
+        },
+        "adwords_hasAdwordsSpend": {
+            "type": "string"
+        },
+        "adwords_adwordsKeywords": {
+            "type": "string"
+        },
+        "adwords_averageAdspend": {
+            "type": "integer"
+        },
+        "adwords_averageAdtraffic": {
+            "type": "integer"
+        },
+        "domainAge_domainAgeDays": {
+            "type": "integer"
+        },
+        "domainAge_registeredDate": {
+            "type": "string"
+        },
+        "domainAge_expiryDate": {
+            "type": "string"
+        },
+        "backlinks_totalBacklinks": {
+            "type": "integer"
+        },
+        "backlinks_totalWebsitesLinking": {
+            "type": "integer"
+        },
+        "organicSearch_averageMonthlyTraffic": {
+            "type": "integer"
+        },
+        "organicSearch_numKeywordsRankedFor": {
+            "type": "integer"
+        },
+        "organicSearch_topKeywordsRankedFor": {
+            "type": "string"
+        },
+        "codeQuality_pagesContainingNonSemanticElementsCount": {
+            "type": "integer"
+        },
+        "codeQuality_pagesTableLayoutCount": {
+            "type": "integer"
+        },
+        "brokenLinks_linksDiscoveredCount": {
+            "type": "integer"
+        },
+        "brokenLinks_linksAnalysedCount": {
+            "type": "integer"
+        },
+        "brokenLinks_linksBrokenCount": {
+            "type": "integer"
+        },
+        "displayAds_hasUsedAds": {
+            "type": "string"
+        },
+        "serverBehaviour_usesGzipCompression": {
+            "type": "string"
+        },
+        "serverBehaviour_errorPageSends404": {
+            "type": "string"
+        },
+        "serverBehaviour_hasSsl": {
+            "type": "string"
+        },
+        "serverBehaviour_notOptimal": {
+            "type": "string"
+        },
+        "serverBehaviour_hasWarnings": {
+            "type": "string"
+        },
+        "ssl_hasSsl": {
+            "type": "string"
+        },
+        "ssl_isExpired": {
+            "type": "string"
+        },
+        "ssl_isValid": {
+            "type": "string"
+        },
+        "ssl_hasRedirect": {
+            "type": "string"
+        },
+        "images_stretchedImageCount": {
+            "type": "integer"
+        },
+        "images_nonWebFriendlyCount": {
+            "type": "integer"
+        },
+        "images_percentImagesSized": {
+            "type": "integer"
+        },
+        "instagramAccount_hasInstagram": {
+            "type": "string"
+        },
+        "vendor_vendor": {
+            "type": "string"
+        },
+        "alternativeText_imagesNoAltCount": {
+            "type": "integer"
+        },
+        "alternativeText_percentageHasAlt": {
+            "type": "integer"
+        },
+        "sitemap_hasSitemap": {
+            "type": "string"
+        },
+        "sitemap_sitemapIssues": {
+            "type": "string"
+        },
+        "pageTitlesAndDescriptions_homepageTitleTag": {
+            "type": "string"
+        },
+        "pageTitlesAndDescriptions_homepageMetaDescription": {
+            "type": "string"
+        },
+        "pageTitlesAndDescriptions_missingItems": {
+            "type": "string"
+        },
+        "pageTitlesAndDescriptions_duplicatedItems": {
+            "type": "string"
+        },
+        "pageTitlesAndDescriptions_percentMissingTitles": {
+            "type": "integer"
+        },
+        "pageTitlesAndDescriptions_percentMissingDescriptions": {
+            "type": "integer"
+        },
+        "pageTitlesAndDescriptions_percentDuplicatedTitles": {
+            "type": "integer"
+        },
+        "pageTitlesAndDescriptions_percentDuplicatedDescriptions": {
+            "type": "integer"
+        },
+        "pageTitlesAndDescriptions_pagesMissingTitleCount": {
+            "type": "integer"
+        },
+        "pageTitlesAndDescriptions_pagesMissingDescriptionCount": {
+            "type": "integer"
+        },
+        "pageTitlesAndDescriptions_pagesDuplicatedTitleCount": {
+            "type": "integer"
+        },
+        "pageTitlesAndDescriptions_pagesDuplicatedDescriptionCount": {
+            "type": "integer"
+        },
+        "ecommerce_hasEcommerce": {
+            "type": "string"
+        },
+        "ecommerce_ecommerceName": {
+            "type": "string"
+        },
+        "structuredData_businessNameDetected": {
+            "type": "string"
+        },
+        "structuredData_businessAddressDetected": {
+            "type": "string"
+        },
+        "structuredData_amountOfBusinessDetails": {
+            "type": "integer"
+        },
+        "structuredData_businessTelephoneDetected": {
+            "type": "string"
+        },
+        "createdBy": {
+            "type": "string"
+        },
+        "created": {
+            "type": "string",
+            "format": "timestamp"
+        },
+        "lastAccessedBy": {
+            "type": "string"
+        },
+        "lastModified": {
+            "type": "string",
+            "format": "timestamp"
+        },
+        "isExpired": {
+            "type": "string"
+        }
+    }
+}
