@@ -47,7 +47,7 @@ class GraderReportingService:
     def map_proposal_record(self, doc):
         scores = doc.get('scores', [])
         if len(scores) > 0:
-            doc['scores'] = list(filter(lambda x: not x['advertiser']['isCompetitor'], scores))[0]
+            doc['scores'] = next(iter(list(filter(lambda x: not x['advertiser']['isCompetitor'], scores))), '')
         else:
             doc['scores'] = {}
         if doc.get('solutions') and len(doc.get('solutions', [])) > 0:
@@ -58,7 +58,7 @@ class GraderReportingService:
         if len(competitors) > 0:
             record['scores_competitorCount'] = len(competitors)
             record['scores_competitorScores'] = ','.join(list(map(lambda c: str(c.get('overallScore', '')), competitors)))
-        record['scores_score'] = scores[0]['overallScore'] if len(scores) > 0 else ''
+        record['scores_score'] = scores[0].get('overallScore', '') if len(scores) > 0 else ''
 
         if doc.get('estimates'):
             self.retrieve_estimates(doc, record)
@@ -84,7 +84,7 @@ class GraderReportingService:
                 map(lambda t: t['tacticName'],
                 estimates['rlDisplayEstimations'][0]['configuration'].get('tactics', [])))
         if 'socialEstimations' in estimates and len(estimates['socialEstimations']) > 0:
-            record['estimates_socialEstType'] = estimates['socialEstimations'][0]['configuration']['configurationType']
+            record['estimates_socialEstType'] = estimates['socialEstimations'][0]['configuration'].get('configurationType', '')
             record['estimates_socialObjectives'] = estimates['socialEstimations'][0]['configuration'].get('objective', '')
         if 'videoAdsEstimations' in estimates:
             record['estimates_youtubeObjective'] = estimates['videoAdsEstimations']['configuration']['marketingObjective']
@@ -111,10 +111,11 @@ class GraderReportingService:
                     budgetEstimates['mediumSearchBudgetEstimate'].get('keywords', [])))
             record['search_estimates_productsServices'] = self.clean_text_content(','.join(configuration.get('keywordIdeas', [])))
             record['search_estimates_includeKeywordFilter'] = self.clean_text_content(','.join(configuration.get('keywordFilter', [])))
-            record['search_estimates_excludeKeywordFilter'] = self.clean_text_content(','.join(configuration.get('negativeKeywords', [])))
+            # LOGGER.info(configuration.get('negativeKeywords', []))
+            record['search_estimates_excludeKeywordFilter'] = self.clean_text_content(','.join(filter(lambda x: x, configuration.get('negativeKeywords', []) or [])))
             record['search_estimates_customKeywords'] = self.clean_text_content(','.join(map(
                 lambda x: x['keyword'] if 'keyword' in x else x, 
-                configuration.get('negativeKeywords', []))))
+                configuration.get('customKeywords', []))))
 
     def retrieve_product_summaries(self, doc, record):
         product_map = {
