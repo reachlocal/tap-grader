@@ -1,6 +1,7 @@
 import singer
 from pymongo import MongoClient
-
+import threading
+import multiprocessing
 
 LOGGER = singer.get_logger()
 
@@ -15,8 +16,8 @@ class GraderReportingService:
         password = config['mongoPassword']
         port = config['mongoPort']
         authSource = config['mongoAuthSource']
-        conn_string = f'mongodb://{user}:{password}@{host}:{port}/?authSource={authSource}'
-        self.client = MongoClient(conn_string)
+        self.conn_string = f'mongodb://{user}:{password}@{host}:{port}/?authSource={authSource}'
+        self.client = MongoClient(self.conn_string)
         self.schema_map = {
             'advertiser_data': 'AdvertiserData',
             'batch_job': 'BatchJob',
@@ -32,7 +33,25 @@ class GraderReportingService:
         }
 
     def get_reports(self):
-        for doc in self.client.proposal_tool[self.schema_map[self.stream]].find():
+        doc_count = self.client.proposal_tool[self.schema_map[self.stream]].estimated_document_count()
+        LOGGER.info(f'Total documents in {self.stream}: {doc_count}')
+        n_cores = 10
+        batch_size = round(doc_count/n_cores+0.5)
+        skips = range(0, n_cores*batch_size, batch_size)
+        threads = [threading.Thread(target=self.process_cursor, args=(skip_n,batch_size, index)) for index, skip_n in enumerate(skips)]
+        for thread in threads:
+            thread.start()
+
+        for thread in threads:
+            thread.join()
+
+    def process_cursor(self, skip_n, batch_size, page):
+        current_index = 0
+        cursor = MongoClient(self.conn_string).proposal_tool[self.schema_map[self.stream]].find().skip(skip_n).limit(batch_size)
+        for doc in cursor:
+            current_index = current_index + 1
+            if current_index % 1000 == 0:
+                LOGGER.info(f'Processing item {current_index} on page {page}')
             record = self.map_proposal_record(doc) if self.stream == 'proposal' else self.map_record(doc)
             singer.write_record(self.stream, record)
 
@@ -69,7 +88,6 @@ class GraderReportingService:
         if doc.get('metadata'):
             record['goals'] = ','.join(doc['metadata']['defaultProposalConfigs'].get('goals', []))
             record['originalProducts'] = ','.join(doc['metadata']['defaultProposalConfigs'].get('selectedProducts', []))
-
         return record
 
     def retrieve_estimates(self, doc, record):
@@ -80,38 +98,37 @@ class GraderReportingService:
                 estimates['gannettDisplayEstimations'][0]['configuration'].get('tactics', [])))
 
         if 'rlDisplayEstimations' in estimates and len(estimates['rlDisplayEstimations']) > 0:
-            record['estimates_displayTactics'] = ','.join(
+            record['estimates_displayTactics'] = self.clean_text_content(','.join(
                 map(lambda t: t['tacticName'],
-                estimates['rlDisplayEstimations'][0]['configuration'].get('tactics', [])))
+                estimates['rlDisplayEstimations'][0]['configuration'].get('tactics', []))))
         if 'socialEstimations' in estimates and len(estimates['socialEstimations']) > 0:
             record['estimates_socialEstType'] = estimates['socialEstimations'][0]['configuration'].get('configurationType', '')
             record['estimates_socialObjectives'] = estimates['socialEstimations'][0]['configuration'].get('objective', '')
         if 'videoAdsEstimations' in estimates:
-            record['estimates_youtubeObjective'] = estimates['videoAdsEstimations']['configuration']['marketingObjective']
+            record['estimates_youtubeObjective'] = estimates['videoAdsEstimations'].get('configuration', {}).get('marketingObjective', '')
         if 'searchEstimations' in estimates and len(estimates['searchEstimations']) > 0:
             configuration = estimates['searchEstimations'][0]['configuration']
             record['search_estimates_campaignName'] = configuration.get('campaignName', '')
             record['search_estimates_website'] = configuration.get('url', '')
-            record['search_estimates_categories'] = ','.join(map(lambda c: c['categoryName'], configuration.get('categories', [])))
-            record['search_estimates_targetType'] = ','.join(list(set(map(lambda l: l['type'], configuration.get('locations', [])))))
-            record['search_estimates_locations'] = ','.join(list(map(
+            record['search_estimates_categories'] = self.clean_text_content(','.join(map(lambda c: c.get('categoryName', ''), configuration.get('categories', []))))
+            record['search_estimates_targetType'] = self.clean_text_content(','.join(list(set(map(lambda l: l['type'], configuration.get('locations', []))))))
+            record['search_estimates_locations'] = self.clean_text_content(','.join(list(map(
                 lambda x: f'{x["targetedRadius"]["radius"]} from {x["targetedRadius"].get("centerAddress", "")}'
                 if x['type'] == 'RADIUS' 
-                else ','.join(x['targetedLocations']),
-                configuration.get('locations', []))))
-            record['search_estimates_estimationType'] = configuration['estimationType']
+                else ','.join(filter(lambda loc: loc, x.get('targetedLocations', []))),
+                configuration.get('locations', [])))))
+            record['search_estimates_estimationType'] = configuration.get('estimationType', '')
             record['search_estimates_includeOneWordKeywords'] = configuration['includeOneWordKeywords']
             budgetEstimates = estimates['searchEstimations'][0].get('budgetEstimates')
             if budgetEstimates:
-                record['search_estimates_budget'] = float(budgetEstimates['mediumSearchBudgetEstimate']['budget'])
-                record['search_estimates_keywordCount'] = int(budgetEstimates['mediumSearchBudgetEstimate']['keywordCount'])
-                record['search_estimates_position'] = float(budgetEstimates['mediumSearchBudgetEstimate']['averagePosition'])
-                record['search_estimates_keywordTexts'] = ','.join(map(
+                record['search_estimates_budget'] = float(budgetEstimates['mediumSearchBudgetEstimate'].get('budget', 0))
+                record['search_estimates_keywordCount'] = int(budgetEstimates['mediumSearchBudgetEstimate'].get('keywordCount', 0))
+                record['search_estimates_position'] = float(budgetEstimates['mediumSearchBudgetEstimate'].get('averagePosition', 0))
+                record['search_estimates_keywordTexts'] = self.clean_text_content(','.join(map(
                     lambda e: e['text'],
-                    budgetEstimates['mediumSearchBudgetEstimate'].get('keywords', [])))
+                    budgetEstimates['mediumSearchBudgetEstimate'].get('keywords', []))))
             record['search_estimates_productsServices'] = self.clean_text_content(','.join(configuration.get('keywordIdeas', [])))
-            record['search_estimates_includeKeywordFilter'] = self.clean_text_content(','.join(configuration.get('keywordFilter', [])))
-            # LOGGER.info(configuration.get('negativeKeywords', []))
+            record['search_estimates_includeKeywordFilter'] = self.clean_text_content(','.join(filter(lambda x: x, configuration.get('keywordFilter', []))))
             record['search_estimates_excludeKeywordFilter'] = self.clean_text_content(','.join(filter(lambda x: x, configuration.get('negativeKeywords', []) or [])))
             record['search_estimates_customKeywords'] = self.clean_text_content(','.join(map(
                 lambda x: x['keyword'] if 'keyword' in x else x, 
@@ -158,9 +175,9 @@ class GraderReportingService:
             val = float(val) if val else ''
         else:
             if isinstance(val, list):
-                val = ','.join(val)
+                val = self.clean_text_content(','.join(val))
             val = self.clean_text_content(str(val))
-        return val
+        return val or ''
 
     def clean_text_content(self, content):
         forbidden = ['\n', '\r', '\0', '\x00']
