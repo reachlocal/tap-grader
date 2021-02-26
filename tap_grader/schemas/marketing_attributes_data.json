@@ -4,6 +4,9 @@
     ],
     "additionalProperties": false,
     "properties": {
+        "platform": {
+            "type": "string"
+        },
         "_id": {
             "type": "string"
         },

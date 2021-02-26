@@ -11,6 +11,7 @@ class GraderReportingService:
         self.config = config
         self.stream = stream
         self.props = schema["properties"]
+        self.platform = config['platform']
         host = config['mongoHost']
         user = config['mongoUser']
         password = config['mongoPassword']
@@ -35,6 +36,8 @@ class GraderReportingService:
     def get_reports(self):
         doc_count = self.client.proposal_tool[self.schema_map[self.stream]].estimated_document_count()
         LOGGER.info(f'Total documents in {self.stream}: {doc_count}')
+        if doc_count == 0:
+            return
         n_cores = 10
         batch_size = round(doc_count/n_cores+0.5)
         skips = range(0, n_cores*batch_size, batch_size)
@@ -61,6 +64,7 @@ class GraderReportingService:
             prop_type = prop[1]['type']
             prop_name = prop[0]
             record[prop_name] = self.get_property(prop_name, prop_type, doc)
+        record['platform'] = self.platform
         return record
 
     def map_proposal_record(self, doc):
